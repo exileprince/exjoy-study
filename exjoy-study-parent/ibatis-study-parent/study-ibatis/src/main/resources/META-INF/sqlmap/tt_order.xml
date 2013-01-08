@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Order">
+	<cacheModel id="productCache" type="LRU">
+		<flushInterval hours="24" />
+		<property name="size" value="1000" />
+	</cacheModel>
+	
+	<typeAlias alias="order" type="cn.exjoy.study.ibatis.dataobject.Order" />
+	
+	<resultMap class="order" id="ORDER-MAP">
+		<result property="orderId" 		column="ORDER_ID" 		javaType="long" jdbcType="NUMBER" nullValue="0"/>
+		<result property="orderNo" 		column="ORDER_NO" 		javaType="java.lang.String" jdbcType="NVARCHAR2" />
+		<result property="customerId" 	column="CUSTOMER_ID" 	javaType="long" jdbcType="NUMBER" nullValue="0"/>
+		<result property="totalAmount" 	column="TOTAL_AMOUNT" 	javaType="java.math.BigDecimal" jdbcType="NUMBER" />
+		<result property="shipAddress" 	column="SHIP_ADDRESS" 	javaType="java.lang.String" jdbcType="NVARCHAR2" />
+		<result property="orderTime" 	column="ORDER_DATE" 	javaType="java.util.Date" jdbcType="TIMESTAMP(6)" />
+		<result property="payTime" 		column="PAY_DATE" 		javaType="java.util.Date" jdbcType="TIMESTAMP(6)" />
+		<result property="shipTime" 	column="SHIP_DATE" 		javaType="java.util.Date" jdbcType="TIMESTAMP(6)" />
+		<result property="CreateTime" 	column="GMT_CREATE" 	javaType="java.util.Date" jdbcType="TIMESTAMP(6)" />
+		<result property="modifyTime" 	column="GMT_MODIFY" 	javaType="java.util.Date" jdbcType="TIMESTAMP(6)" />
+	</resultMap>
+	
+	<select id="LOAD-BY-ID" resultMap="ORDER-MAP">
+		<![CDATA[
+			SELECT 
+				ORDER_ID,
+				ORDER_NO,
+				CUSTOMER_ID,
+				TOTAL_AMOUNT,
+				SHIP_ADDRESS,
+				ORDER_DATE,
+				PAY_DATE,
+				SHIP_DATE,
+				GMT_CREATE,
+				GMT_MODIFY
+			FROM STUDY_USER.TT_ORDER
+			WHERE ORDER_ID = #id#
+		]]>
+	</select>
+	
+		<select id="LOAD-BY-ID-LOCKED" resultMap="ORDER-MAP">
+		<![CDATA[
+			SELECT 
+				ORDER_ID,
+				ORDER_NO,
+				CUSTOMER_ID,
+				TOTAL_AMOUNT,
+				SHIP_ADDRESS,
+				ORDER_DATE,
+				PAY_DATE,
+				SHIP_DATE,
+				GMT_CREATE,
+				GMT_MODIFY
+			FROM STUDY_USER.TT_ORDER
+			WHERE ORDER_ID = #id#
+			FOR UPDATE
+		]]>
+	</select>
+	
+	<select id="LOAD-ALL" resultMap="ORDER-MAP">
+		<![CDATA[
+			SELECT 
+				ORDER_ID,
+				ORDER_NO,
+				CUSTOMER_ID,
+				TOTAL_AMOUNT,
+				SHIP_ADDRESS,
+				ORDER_DATE,
+				PAY_DATE,
+				SHIP_DATE,
+				GMT_CREATE,
+				GMT_MODIFY
+			FROM STUDY_USER.TT_ORDER
+		]]>
+	</select>
+	
+	<insert id="INSERT-ORDER" parameterClass="order">
+		<selectKey resultClass="long" keyProperty="orderId">
+			<![CDATA[
+				SELECT study_user.SEQ_TT_ORDER.NEXTVAL FROM DUAL
+			]]>
+		</selectKey>
+		<![CDATA[
+			INSERT INTO STUDY_USER.TT_ORDER(ORDER_ID,ORDER_NO,CUSTOMER_ID,TOTAL_AMOUNT,SHIP_ADDRESS,ORDER_DATE,PAY_DATE,SHIP_DATE,GMT_CREATE,GMT_MODIFY)
+			VALUES (#orderId#, #orderNo#, #customerId#, #totalAmount#, #shipAddress#, #orderTime#, #payTime#, #shipTime#, #CreateTime#, #modifyTime#)
+		]]>
+	</insert>
+</sqlMap>

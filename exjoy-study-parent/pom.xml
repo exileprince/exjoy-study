@@ -1,0 +1,124 @@
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>cn.exjoy.study</groupId>
+	<artifactId>exjoy-study-parent</artifactId>
+	<version>1.0</version>
+	<packaging>pom</packaging>
+
+	<repositories>
+		<repository>
+			<id>public</id>
+			<url>http://localhost:8888/nexus/content/groups/public</url>
+		</repository>
+	</repositories>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>public</id>
+			<url>http://localhost:8888/nexus/content/groups/public</url>
+		</pluginRepository>
+	</pluginRepositories>
+
+	<distributionManagement>
+		<repository>
+			<id>release</id>
+			<name>release</name>
+			<url>http://localhost:8888/nexus/content/repositories/releases</url>
+		</repository>
+	</distributionManagement>
+
+	<properties>
+		<srping.version>3.1.0.RELEASE</srping.version>
+		<servlet.api.version>2.5</servlet.api.version>
+		<jdbc.groupId>com.oracle</jdbc.groupId>
+		<jdbc.artifactId>ojdbc14</jdbc.artifactId>
+		<jdbc.oracle.version>10.2.0.5</jdbc.oracle.version>
+
+		<ibatis.common.version>2.1.7.597</ibatis.common.version>
+		<ibatis.dao.version>2.1.7.597</ibatis.dao.version>
+		<ibatis.sqlmap.version>2.3.4.726</ibatis.sqlmap.version>
+		<commons.lang.version>2.4</commons.lang.version>
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>4.10</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-webmvc</artifactId>
+				<version>${srping.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-beans</artifactId>
+				<version>${srping.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>javax.servlet</groupId>
+				<artifactId>servlet-api</artifactId>
+				<version>${servlet.api.version}</version>
+				<scope>provided</scope>
+			</dependency>
+
+
+			<dependency>
+				<groupId>org.apache.ibatis</groupId>
+				<artifactId>ibatis-sqlmap</artifactId>
+				<version>${ibatis.sqlmap.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.ibatis</groupId>
+				<artifactId>ibatis2-common</artifactId>
+				<version>${ibatis.common.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.ibatis</groupId>
+				<artifactId>ibatis2-dao</artifactId>
+				<version>${ibatis.dao.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>${jdbc.groupId}</groupId>
+				<artifactId>${jdbc.artifactId}</artifactId>
+				<version>${jdbc.oracle.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>commons-lang</groupId>
+				<artifactId>commons-lang</artifactId>
+				<version>${commons.lang.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<modules>
+		<module>spring-study-parent</module>
+		<module>design-patterns-parent</module>
+		<module>basic-study-parent</module>
+		<module>ibatis-study-parent</module>
+		<module>webservice-study-parent</module>
+		<module>velocity-study-parent</module>
+		<module>apache-component-study-parent</module>
+		<module>tdd-study-parent</module>
+	</modules>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<configuration>
+						<source>1.6</source>
+						<target>1.6</target>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+</project>

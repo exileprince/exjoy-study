@@ -1,0 +1,12 @@
+
+###foreach($item in $data.entrySet())
+##	$item.key    $item.value
+###end
+
+#foreach($item in $data.entrySet())
+	$item.value.name    $item.value.sex
+#end
+
+#foreach($item in $data)
+	$item.name    $item.sex
+#end
