@@ -41,18 +41,40 @@ public class ActiveMqStudyQueueConsumer {
 
             consumer = session.createConsumer(destination);
 
-            while (true) {
-                TextMessage message = (TextMessage) consumer.receive(10000);
 
-                if (null != message) {
-                    System.out.println(message.getText());
-                    session.commit();
-                } else {
-                    break;
+            session.setMessageListener(new MessageListener() {
+                @Override
+                public void onMessage(Message message) {
+
+                    try {
+                    TextMessage msg = (TextMessage)message;
+
+                    System.out.println(msg.getText());
+                    }catch (Exception ex){
+                        ex.printStackTrace();
+                    }
                 }
-            }
+            });
+
+//            while (true) {
+//                TextMessage message = (TextMessage) consumer.receive(10000);
+//
+//                if (null != message) {
+//                    System.out.println(message.getText());
+//                    session.commit();
+//                } else {
+//                    break;
+//                }
+//            }
         } catch (Exception ex) {
             ex.printStackTrace();
+        }finally {
+            try {
+                session.close();
+                connection.close();
+            }catch (Exception ex){
+                ex.printStackTrace();
+            }
         }
     }
 
