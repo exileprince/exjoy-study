@@ -41,8 +41,7 @@ public class ActiveMqStudyQueueConsumer {
 
             consumer = session.createConsumer(destination);
 
-
-            session.setMessageListener(new MessageListener() {
+            consumer.setMessageListener(new MessageListener() {
                 @Override
                 public void onMessage(Message message) {
 
@@ -55,6 +54,7 @@ public class ActiveMqStudyQueueConsumer {
                     }
                 }
             });
+
 
 //            while (true) {
 //                TextMessage message = (TextMessage) consumer.receive(10000);
