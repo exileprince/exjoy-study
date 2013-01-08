@@ -5,7 +5,8 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans 
   						http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-	<import resource="classpath:TestBeanContext1.xml" />
-	<import resource="classpath:TestBeanContext2.xml" />
+	<import resource="classpath:MockBeanContext.xml" />
 
+	<bean id="testBean1" class="cn.exjoy.study.spring.TestBean"
+		p:mockBean-ref="mockBean"></bean>
 </beans>
