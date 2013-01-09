@@ -44,7 +44,6 @@ public class ActiveMqStudyQueueConsumer {
             consumer.setMessageListener(new MessageListener() {
                 @Override
                 public void onMessage(Message message) {
-
                     try {
                     TextMessage msg = (TextMessage)message;
 
