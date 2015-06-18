@@ -15,6 +15,6 @@
 		<module>socket-study-server</module>
 		<module>study-thread</module>
 		<module>study-inherit</module>
-        <module>CollectionsStudy</module>
-    </modules>
+		<module>study-basic</module>
+	</modules>
 </project>

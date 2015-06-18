@@ -1,27 +1,27 @@
 package cn.exjoy.study.spring;
 
-import org.springframework.beans.factory.support.DefaultListableBeanFactory;
-import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class SpringBeanFactoryBasicStudy {
 
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
+    /**
+     * @param args
+     */
+    public static void main(String[] args) {
 
-		DefaultListableBeanFactory factory = new DefaultListableBeanFactory();
+        BeanFactory factory = new ClassPathXmlApplicationContext("context.xml");
 
-		XmlBeanDefinitionReader reader = new XmlBeanDefinitionReader(factory);
+        //XmlBeanDefinitionReader reader = new XmlBeanDefinitionReader(factory);
 
-		Resource resource = new ClassPathResource("context.xml");
+        //Resource resource = new ClassPathResource("context.xml");
+        //reader.loadBeanDefinitions(resource);
 
-		reader.loadBeanDefinitions(resource);
+        TestBean bean1 = (TestBean) factory.getBean("testBean1");
+        TestBean bean2 = (TestBean) factory.getBean("testBean1");
 
-		MockBean bean = (MockBean) factory.getBean("testBean");
-		System.out.println(bean.getMessage());
-	}
+        bean1.display();
+        bean2.display();
+    }
 
 }

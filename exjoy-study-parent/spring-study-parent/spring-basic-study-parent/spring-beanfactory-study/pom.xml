@@ -7,11 +7,15 @@
 		<version>1.0</version>
 	</parent>
 	<artifactId>spring-beanfactory-study</artifactId>
-	
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-beans</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
 		</dependency>
 	</dependencies>
 </project>

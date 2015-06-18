@@ -10,5 +10,6 @@
 	<packaging>pom</packaging>
 	<modules>
 		<module>httpclient-study</module>
-	</modules>
+        <module>activemq-study</module>
+    </modules>
 </project>
